@@ -7,7 +7,7 @@ variable "region_default" {
 variable "project_name" {
   description = "Nome do projeto"
   type        = string
-  default     = "hackaton-soat11-cliptozip"
+  default     = "cliptozip"
 }
 
 variable "environment" {
@@ -51,14 +51,7 @@ variable "db_password" {
 variable "db_instance_class" {
   description = "Classe da instância do RDS"
   type        = string
-  default     = "db.t3.micro"
-}
-
-# Redis Variables
-variable "redis_node_type" {
-  description = "Tipo de nó do Redis"
-  type        = string
-  default     = "cache.t3.micro"
+  default     = "db.t4g.micro"
 }
 
 # Seu IP público para acesso remoto

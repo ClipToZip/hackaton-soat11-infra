@@ -3,7 +3,8 @@
 # ========================================
 
 resource "aws_s3_bucket" "video_storage" {
-  bucket = "${var.project_name}-videos-${var.environment}"
+  bucket        = "${var.project_name}-videos-${var.environment}"
+  force_destroy = true  # Permite deletar o bucket mesmo com conteúdo
 
   tags = {
     Name        = "${var.project_name}-videos-${var.environment}"

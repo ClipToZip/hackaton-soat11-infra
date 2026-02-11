@@ -18,32 +18,32 @@ variable "security_group_ids" {
   type        = list(string)
 }
 
-variable "node_type" {
-  description = "Tipo de nó do Redis"
+variable "major_engine_version" {
+  description = "Versão major do Redis (ex: 7)"
   type        = string
-  default     = "cache.t3.micro"
+  default     = "7"
 }
 
-variable "num_cache_nodes" {
-  description = "Número de nós do cache"
+variable "max_data_storage_gb" {
+  description = "Armazenamento máximo de dados em GB para o cache serverless"
+  type        = number
+  default     = 5
+}
+
+variable "max_ecpu_per_second" {
+  description = "ECPU máximo por segundo para o cache serverless"
+  type        = number
+  default     = 5000
+}
+
+variable "daily_snapshot_time" {
+  description = "Horário diário para snapshot automático (formato: HH:MM)"
+  type        = string
+  default     = "03:00"
+}
+
+variable "snapshot_retention_limit" {
+  description = "Número de dias para reter snapshots automáticos"
   type        = number
   default     = 1
-}
-
-variable "parameter_group_name" {
-  description = "Nome do parameter group"
-  type        = string
-  default     = "default.redis7"
-}
-
-variable "engine_version" {
-  description = "Versão do Redis"
-  type        = string
-  default     = "7.0"
-}
-
-variable "port" {
-  description = "Porta do Redis"
-  type        = number
-  default     = 6379
 }

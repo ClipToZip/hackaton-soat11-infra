@@ -15,9 +15,6 @@ db_username       = "dbadmin"
 db_password       = "SuaSenhaSuperSegura123!" # MUDE ISSO!
 db_instance_class = "db.t3.micro"
 
-# Redis
-redis_node_type = "cache.t3.micro"
-
 # Security - SEU IP PÚBLICO PARA ACESSO REMOTO
 # Para descobrir seu IP: curl ifconfig.me
 my_ip = "0.0.0.0/0" # IMPORTANTE: Troque por seu IP (ex: 123.456.789.0/32)

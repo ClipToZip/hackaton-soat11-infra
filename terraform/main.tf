@@ -73,7 +73,6 @@ module "redis" {
   environment        = var.environment
   subnet_ids         = module.networking.public_subnet_ids
   security_group_ids = [module.security_groups.redis_security_group_id]
-  node_type          = var.redis_node_type
 
   depends_on = [module.networking, module.security_groups]
 }

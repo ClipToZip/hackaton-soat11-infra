@@ -32,19 +32,19 @@
   - Engine version: 7.0
 
 ### 📨 Mensageria (SQS)
-- **Fila: video-event**
+- **Fila: cliptozip-events**
   - Recebe notificações de upload de vídeos
   - Visibility timeout: 5 minutos
   - Message retention: 4 dias
   - Long polling: 10 segundos
-  - DLQ: video-event-dlq (3 tentativas)
+  - DLQ: cliptozip-events-dlq (3 tentativas)
   
-- **Fila: video-processed**
+- **Fila: cliptozip-notifications**
   - Recebe notificações de processamento concluído
   - Visibility timeout: 10 minutos
   - Message retention: 4 dias
   - Long polling: 10 segundos
-  - DLQ: video-processed-dlq (3 tentativas)
+  - DLQ: cliptozip-notifications-dlq (3 tentativas)
 
 ### 🔒 Security Groups
 - **RDS Security Group**: Porta 5432 (PostgreSQL)
