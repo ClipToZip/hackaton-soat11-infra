@@ -1,39 +1,39 @@
-output "video_event_queue_url" {
-  description = "URL da fila video-event"
-  value       = aws_sqs_queue.video_event.url
+output "cliptozip_events_queue_url" {
+  description = "URL da fila cliptozip-events"
+  value       = aws_sqs_queue.cliptozip_events.url
 }
 
-output "video_event_queue_arn" {
-  description = "ARN da fila video-event"
-  value       = aws_sqs_queue.video_event.arn
+output "cliptozip_events_queue_arn" {
+  description = "ARN da fila cliptozip-events"
+  value       = aws_sqs_queue.cliptozip_events.arn
 }
 
-output "video_event_queue_name" {
-  description = "Nome da fila video-event"
-  value       = aws_sqs_queue.video_event.name
+output "cliptozip_events_queue_name" {
+  description = "Nome da fila cliptozip-events"
+  value       = aws_sqs_queue.cliptozip_events.name
 }
 
-output "video_event_dlq_url" {
-  description = "URL da DLQ video-event"
-  value       = aws_sqs_queue.video_event_dlq.url
+output "cliptozip_events_dlq_url" {
+  description = "URL da DLQ cliptozip-events"
+  value       = aws_sqs_queue.cliptozip_events_dlq.url
 }
 
-output "video_processed_queue_url" {
-  description = "URL da fila video-processed"
-  value       = aws_sqs_queue.video_processed.url
+output "cliptozip_notifications_queue_url" {
+  description = "URL da fila cliptozip-notifications"
+  value       = aws_sqs_queue.cliptozip_notifications.url
 }
 
-output "video_processed_queue_arn" {
-  description = "ARN da fila video-processed"
-  value       = aws_sqs_queue.video_processed.arn
+output "cliptozip_notifications_queue_arn" {
+  description = "ARN da fila cliptozip-notifications"
+  value       = aws_sqs_queue.cliptozip_notifications.arn
 }
 
-output "video_processed_queue_name" {
-  description = "Nome da fila video-processed"
-  value       = aws_sqs_queue.video_processed.name
+output "cliptozip_notifications_queue_name" {
+  description = "Nome da fila cliptozip-notifications"
+  value       = aws_sqs_queue.cliptozip_notifications.name
 }
 
-output "video_processed_dlq_url" {
-  description = "URL da DLQ video-processed"
-  value       = aws_sqs_queue.video_processed_dlq.url
+output "cliptozip_notifications_dlq_url" {
+  description = "URL da DLQ cliptozip-notifications"
+  value       = aws_sqs_queue.cliptozip_notifications_dlq.url
 }

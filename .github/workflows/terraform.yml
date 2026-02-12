@@ -1,0 +1,84 @@
+name: Deploy infra AWS with terraform
+
+# Gatilhos para execução do workflow
+on:
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    name: Create AWS infrastructure with Terraform
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout do código
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Setup Terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.13.3
+
+      # 3. Configuração das credenciais AWS
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      # 4. Inicialização do Terraform
+      - name: Terraform Init
+        working-directory: ./terraform
+        run: terraform init -reconfigure
+
+      # 5. Validação do Terraform
+      - name: Terraform Validate
+        working-directory: ./terraform
+        run: terraform validate
+
+      # 6. Planejamento do Terraform
+      - name: Terraform Plan
+        working-directory: ./terraform
+        run: |
+            terraform plan -input=false \
+                -var "db_name"=${{ secrets.DB_NAME }} \
+                -var "db_username"=${{ secrets.DB_USERNAME }} \
+                -var "db_password"=${{ secrets.DB_PASSWORD }}
+
+      # 7. Aplicação do Terraform
+      - name: Terraform Apply
+        working-directory: ./terraform
+        run: |
+            terraform apply -auto-approve -input=false \
+                -var "db_name"=${{ secrets.DB_NAME }} \
+                -var "db_username"=${{ secrets.DB_USERNAME }} \
+                -var "db_password"=${{ secrets.DB_PASSWORD }}
+
+      # 8. Exibir Outputs do Terraform
+      - name: Show Terraform Outputs
+        working-directory: ./terraform
+        run: |
+          echo "===================================="
+          echo "📋 OUTPUTS DA INFRAESTRUTURA"
+          echo "===================================="
+          terraform output -json | jq -r '
+            "🌐 VPC ID: \(.vpc_id.value)",
+            "",
+            "🗄️  RDS PostgreSQL:",
+            "   Endpoint: \(.rds_endpoint.value)",
+            "   Database: \(.rds_database_name.value)",
+            "",
+            "⚡ Redis Serverless:",
+            "   Endpoint: \(.redis_endpoint.value)",
+            "   Port: \(.redis_port.value)",
+            "",
+            "📦 S3 Bucket:",
+            "   Name: \(.s3_bucket_name.value)",
+            "   ARN: \(.s3_bucket_arn.value)",
+            "",
+            "📨 SQS Queues:",
+            "   Events: \(.cliptozip_events_queue_url.value)",
+            "   Notifications: \(.cliptozip_notifications_queue_url.value)"
+          '

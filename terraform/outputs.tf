@@ -60,37 +60,37 @@ output "rds_database_name" {
 # ========================================
 
 output "redis_endpoint" {
-  description = "Endpoint do Redis"
-  value       = module.redis.cluster_address
+  description = "Endpoint do Redis Serverless"
+  value       = module.redis.cache_endpoint
 }
 
 output "redis_port" {
-  description = "Porta do Redis"
-  value       = module.redis.cluster_port
+  description = "Porta do Redis Serverless"
+  value       = module.redis.cache_port
 }
 
 # ========================================
 # SQS Outputs
 # ========================================
 
-output "video_event_queue_url" {
-  description = "URL da fila video-event"
-  value       = module.sqs.video_event_queue_url
+output "cliptozip_events_queue_url" {
+  description = "URL da fila cliptozip-events"
+  value       = module.sqs.cliptozip_events_queue_url
 }
 
-output "video_event_queue_name" {
-  description = "Nome da fila video-event"
-  value       = module.sqs.video_event_queue_name
+output "cliptozip_events_queue_name" {
+  description = "Nome da fila cliptozip-events"
+  value       = module.sqs.cliptozip_events_queue_name
 }
 
-output "video_processed_queue_url" {
-  description = "URL da fila video-processed"
-  value       = module.sqs.video_processed_queue_url
+output "cliptozip_notifications_queue_url" {
+  description = "URL da fila cliptozip-notifications"
+  value       = module.sqs.cliptozip_notifications_queue_url
 }
 
-output "video_processed_queue_name" {
-  description = "Nome da fila video-processed"
-  value       = module.sqs.video_processed_queue_name
+output "cliptozip_notifications_queue_name" {
+  description = "Nome da fila cliptozip-notifications"
+  value       = module.sqs.cliptozip_notifications_queue_name
 }
 
 # ========================================
@@ -108,14 +108,14 @@ output "connection_info" {
       username = var.db_username
     }
     redis = {
-      host = module.redis.cluster_address
-      port = module.redis.cluster_port
+      host = module.redis.cache_endpoint
+      port = module.redis.cache_port
     }
     sqs = {
-      video_event_url      = module.sqs.video_event_queue_url
-      video_event_name     = module.sqs.video_event_queue_name
-      video_processed_url  = module.sqs.video_processed_queue_url
-      video_processed_name = module.sqs.video_processed_queue_name
+      cliptozip_events_url      = module.sqs.cliptozip_events_queue_url
+      cliptozip_events_name     = module.sqs.cliptozip_events_queue_name
+      cliptozip_notifications_url  = module.sqs.cliptozip_notifications_queue_url
+      cliptozip_notifications_name = module.sqs.cliptozip_notifications_queue_name
     }
   }
   sensitive = false
