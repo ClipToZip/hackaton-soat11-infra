@@ -71,7 +71,7 @@ module "redis" {
 
   project_name       = var.project_name
   environment        = var.environment
-  subnet_ids         = module.networking.public_subnet_ids
+  subnet_ids         = module.networking.private_subnet_ids
   security_group_ids = [module.security_groups.redis_security_group_id]
 
   depends_on = [module.networking, module.security_groups]
